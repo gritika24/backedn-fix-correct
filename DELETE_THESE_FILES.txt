@@ -1,0 +1,23 @@
+Delete these files from your Laravel project (they are replaced by
+app/Http/Middleware/EnsureUserHasRole.php and the new tests):
+
+app/Http/Middleware/AdminMiddleware.php
+app/Http/Middleware/CafeOwnerMiddleware.php
+app/Http/Middleware/UserMiddleware.php
+tests/Feature/ExampleTest.php
+tests/Unit/ExampleTest.php
+
+Then run, from the project folder:
+
+  php artisan migrate          (adds indexes + fixes timer goal status - your data is kept)
+  php artisan config:clear
+  php artisan db:seed          (adds badges + the admin account; safe to re-run)
+  php artisan test             (should show 41 passed)
+
+Add these lines to your .env (see .env.example for what each one does):
+
+  SANCTUM_EXPIRATION_MINUTES=43200
+  ADMIN_EMAIL=admin@cafeverse.test
+  ADMIN_PASSWORD=choose-a-strong-password
+  CAFEVERSE_MIN_VISIT_MINUTES=5
+  CAFEVERSE_ONE_VISIT_PER_DAY=true
